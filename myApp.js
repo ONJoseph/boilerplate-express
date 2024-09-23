@@ -11,4 +11,11 @@ app.get('/', function(req, res) {
   res.sendFile(absolutePath);
 });
 
+// Serve JSON at the "/json" route
+app.get('/json', function(req, res) {
+    res.json({
+      message: "Hello json"
+    });
+  });
+
 module.exports = app;
