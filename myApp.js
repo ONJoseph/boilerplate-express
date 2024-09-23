@@ -1,37 +1,9 @@
-let express = require('express');
-let app = express();
+var express = require('express');
+var app = express();
 
-console.log("Hello World");
+// Serve the string "Hello Express" at the root path "/"
+app.get('/', function(req, res) {
+  res.send("Hello Express");
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- module.exports = app;
+module.exports = app;
