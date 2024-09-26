@@ -1,6 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser'); // Require body-parser
 var app = express();
-require('dotenv').config();
+
+// Use body-parser to parse URL-encoded data
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Root-level logger middleware
 app.use(function(req, res, next) {
@@ -26,6 +29,13 @@ app.get('/:word/echo', function(req, res) {
 app.get('/name', function(req, res) {
   const firstName = req.query.first;  // Capture first name from query string
   const lastName = req.query.last;    // Capture last name from query string
+  res.json({ name: `${firstName} ${lastName}` }); // Respond with full name
+});
+
+// POST handler to capture form data
+app.post('/name', function(req, res) {
+  const firstName = req.body.first;  // Capture first name from request body
+  const lastName = req.body.last;    // Capture last name from request body
   res.json({ name: `${firstName} ${lastName}` }); // Respond with full name
 });
 
