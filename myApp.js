@@ -10,10 +10,16 @@ app.use(function(req, res, next) {
 
 // Middleware to add the current time to the request object
 app.get('/now', function(req, res, next) {
-  req.time = new Date().toString(); // Add time to req object
-  next(); // Pass control to the next function in the chain
+  req.time = new Date().toString();
+  next();
 }, function(req, res) {
-  res.json({ time: req.time }); // Respond with the time in JSON format
+  res.json({ time: req.time });
+});
+
+// Echo server
+app.get('/:word/echo', function(req, res) {
+  const word = req.params.word; // Capture the word from the URL
+  res.json({ echo: word });     // Respond with the word in JSON format
 });
 
 // Routes
