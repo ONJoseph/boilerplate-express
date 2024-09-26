@@ -4,9 +4,16 @@ require('dotenv').config();
 
 // Root-level logger middleware
 app.use(function(req, res, next) {
-  const logString = `${req.method} ${req.path} - ${req.ip}`;
-  console.log(logString);
-  next(); // Call the next middleware or route handler
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
+});
+
+// Middleware to add the current time to the request object
+app.get('/now', function(req, res, next) {
+  req.time = new Date().toString(); // Add time to req object
+  next(); // Pass control to the next function in the chain
+}, function(req, res) {
+  res.json({ time: req.time }); // Respond with the time in JSON format
 });
 
 // Routes
