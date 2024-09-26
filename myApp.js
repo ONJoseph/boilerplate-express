@@ -32,13 +32,18 @@ app.get('/name', function(req, res) {
   res.json({ name: `${firstName} ${lastName}` }); // Respond with full name
 });
 
-// POST handler to capture form data
-app.post('/name', function(req, res) {
-  const firstName = req.body.first;  // Capture first name from request body
-  const lastName = req.body.last;    // Capture last name from request body
-  res.json({ name: `${firstName} ${lastName}` }); // Respond with full name
-});
-
+// Mount a POST handler at the path '/name'
+app.post('/name', function (req, res) {
+    // Extract 'first' and 'last' from the POST body (submitted by the form)
+    const firstName = req.body.first;
+    const lastName = req.body.last;
+    
+    // Respond with the JSON object
+    res.json({
+      name: `${firstName} ${lastName}`
+    });
+  });
+  
 // Serve static HTML file
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/views/index.html');
