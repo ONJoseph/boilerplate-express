@@ -22,11 +22,19 @@ app.get('/:word/echo', function(req, res) {
   res.json({ echo: word });     // Respond with the word in JSON format
 });
 
-// Routes
+// Get query parameters
+app.get('/name', function(req, res) {
+  const firstName = req.query.first;  // Capture first name from query string
+  const lastName = req.query.last;    // Capture last name from query string
+  res.json({ name: `${firstName} ${lastName}` }); // Respond with full name
+});
+
+// Serve static HTML file
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+// JSON response with optional uppercase message
 app.get('/json', function(req, res) {
   const messageStyle = process.env.MESSAGE_STYLE;
   const message = messageStyle === 'uppercase' ? 'HELLO JSON' : 'Hello json';
